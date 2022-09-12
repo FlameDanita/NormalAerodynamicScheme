@@ -1,7 +1,16 @@
 import ctypes
+from inspect import Attribute
+import os
+
+_filepath = os.path.dirname(__file__)
+
+try:
+    os.add_dll_directory(_filepath)
+except AttributeError:
+    pass
 
 #  Подключение DLL
-libstructpy = ctypes.CDLL('./AASM6_DYN.dll')
+libstructpy = ctypes.CDLL(_filepath + '/AASM6_DYN.dll')
 
 ErrorMessageTable = {
     1: 'число должно быть действительным',
